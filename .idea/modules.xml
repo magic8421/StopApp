@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Code-StopApp.iml" filepath="$PROJECT_DIR$/.idea/modules/Code-StopApp.iml" group="StopApp" />
       <module fileurl="file://$PROJECT_DIR$/StopApp.iml" filepath="$PROJECT_DIR$/StopApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StopApp-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StopApp-app.iml" group="StopApp/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

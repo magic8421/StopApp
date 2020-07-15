@@ -27,6 +27,13 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/menu_running"
+        android:icon="@drawable/ic_play_circle_outline_black"
+        android:orderInCategory="1"
+        android:title="@string/add"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/menu_setting"
         android:orderInCategory="1"
         android:title="@string/setting"

@@ -179,6 +179,7 @@ public class MainFragment extends BaseFragment implements DisableAppsContract.Vi
     public void onRefresh() {
         super.onRefresh();
         mPresenter.start();
+        mRecyclerView.smoothScrollToPosition(0);
     }
 
     @Override

@@ -139,7 +139,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
             mListDisableApps = appList;
         } else {
             for (AppInfo appInfo : appList) {
-                if (appInfo.isSystemApp() == 0) {
+                if (appInfo.isSystemApp() == 0 /* && appInfo.isEnable() == 1 */) {
                     mListDisableApps.add(appInfo);
                 }
             }

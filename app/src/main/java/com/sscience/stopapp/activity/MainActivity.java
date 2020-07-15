@@ -228,6 +228,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.menu_add:
                 AppListActivity.actionStartActivity(this, 1, false);
                 break;
+            case R.id.menu_running:
+                mMainFragment.onRefresh();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
