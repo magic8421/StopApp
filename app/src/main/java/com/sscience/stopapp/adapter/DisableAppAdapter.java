@@ -50,10 +50,9 @@ public class DisableAppAdapter extends AppAdapter implements Filterable {
             ivAppIcon.getDrawable().setColorFilter(mColorFilter50);
         } else {
             tvAppName.setTextColor(info.isEnable() == 1
-                    ? mMainActivity.getResources().getColor(R.color.textPrimary)
-                    : mMainActivity.getResources().getColor(R.color.translucentBg));
-//            ivAppIcon.getDrawable().setColorFilter(info.isEnable() == 1
-//                    ? mColorFilterNormal : mColorFilterGrey);
+                    ? mMainActivity.getResources().getColor(R.color.textEnabledApp)
+                    : mMainActivity.getResources().getColor(R.color.textDisabledApp));
+            ivAppIcon.getDrawable().setColorFilter(mColorFilterNormal);
         }
 //        AppCompatCheckBox cb = viewHolder.getView(R.id.cb_select_apps);
 //        cb.setOnCheckedChangeListener(null); // CheckBox在执行setChecked时会触发setOnCheckedChangeListener

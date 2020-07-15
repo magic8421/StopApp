@@ -56,12 +56,13 @@ public abstract class AppAdapter extends BaseCommonAdapter<List<AppInfo>> {
         Bundle payload = (Bundle) payloads.get(0);
         int isEnable = payload.getInt(BUNDLE_PAYLOAD);
         ((TextView) holder.getView(R.id.tv_app_name)).setTextColor(isEnable == 1
-                ? mResources.getColor(R.color.textPrimary) : mResources.getColor(R.color.translucentBg));
+                ? mResources.getColor(R.color.textEnabledApp) :
+                mResources.getColor(R.color.textDisabledApp));
 
 //        if (isEnable == 1) {
-            mMatrix.setSaturation(1);
-            mColorFilterNormal = new ColorMatrixColorFilter(mMatrix);
-            ((ImageView) holder.getView(R.id.iv_app_icon)).setColorFilter(mColorFilterNormal);
+              mMatrix.setSaturation(1);
+              mColorFilterNormal = new ColorMatrixColorFilter(mMatrix);
+              ((ImageView) holder.getView(R.id.iv_app_icon)).setColorFilter(mColorFilterNormal);
 //        } else {
 //            mMatrix.setSaturation(0);
 //            mColorFilterGrey = new ColorMatrixColorFilter(mMatrix);

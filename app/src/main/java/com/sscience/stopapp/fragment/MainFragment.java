@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.science.baserecyclerviewadapter.interfaces.OnItemClickListener;
 import com.science.myloggerlibrary.MyLogger;
@@ -178,6 +179,7 @@ public class MainFragment extends BaseFragment implements DisableAppsContract.Vi
     @Override
     public void onRefresh() {
         super.onRefresh();
+        Toast.makeText(mMainActivity,"已刷新",Toast.LENGTH_SHORT).show();
         mPresenter.start();
         mRecyclerView.smoothScrollToPosition(0);
     }

@@ -15,6 +15,7 @@ import com.sscience.stopapp.database.AppInfoDBOpenHelper;
 import com.sscience.stopapp.model.AppsRepository;
 import com.sscience.stopapp.model.GetAppsCallback;
 import com.sscience.stopapp.model.GetRootCallback;
+import com.sscience.stopapp.service.RootActionIntentService;
 import com.sscience.stopapp.util.SharedPreferenceUtil;
 import com.sscience.stopapp.util.ShortcutsManager;
 import com.sscience.stopapp.widget.AppInfoComparator;
@@ -102,6 +103,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                         mListDisableApps.get(position).setEnable(1);
                         addShortcut(appInfo);
                         mView.upDateItemIfLaunch(appInfo, position);
+
                         launchAppIntent(appInfo.getAppPackageName());
                     } else if (flag == CMD_FLAG_UNINSTALL) {
                         mAppInfoDBController.deleteDisableApp(appInfo.getAppPackageName(), AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
@@ -169,6 +171,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
         if (appInfo.isEnable() == 0) {
             pmCommand(AppsRepository.COMMAND_ENABLE + appInfo.getAppPackageName(), CMD_FLAG_LAUNCH_APP,
                     appInfo, position);
+            SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
         } else {
             addShortcut(appInfo);
             launchAppIntent(appInfo.getAppPackageName());
@@ -210,6 +213,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                                             CMD_FLAG_BATCH_APPS, null, -1);
                                     mAppInfoDBController.updateDisableApp(appInfo.getAppPackageName(), 0,
                                             AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+                                    SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
                                 }
                             }
                         } else if (type == 1) { // 启用应用
