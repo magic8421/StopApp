@@ -101,7 +101,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                         mAppInfoDBController.updateDisableApp(appInfo.getAppPackageName(), 1
                                 , AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
                         mListDisableApps.get(position).setEnable(1);
-                        addShortcut(appInfo);
+                        //addShortcut(appInfo);
                         mView.upDateItemIfLaunch(appInfo, position);
 
                         launchAppIntent(appInfo.getAppPackageName());
@@ -173,7 +173,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                     appInfo, position);
             SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
         } else {
-            addShortcut(appInfo);
+            //addShortcut(appInfo);
             launchAppIntent(appInfo.getAppPackageName());
             mView.upDateItemIfLaunch(null, -1);
         }
@@ -213,7 +213,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                                             CMD_FLAG_BATCH_APPS, null, -1);
                                     mAppInfoDBController.updateDisableApp(appInfo.getAppPackageName(), 0,
                                             AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
-                                    SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
+                                    //SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
                                 }
                             }
                         } else if (type == 1) { // 启用应用
@@ -256,6 +256,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                             public void run() {
                                 mView.getRootSuccess(mListDisableApps, mListDisableAppsNew);
                                 mListDisableApps = mListDisableAppsNew;
+                                DisableAppsPresenter.this.updateHomeApps();
                             }
                         }, cmdNum < 2 ? 1000 : 2000);
                     }

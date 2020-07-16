@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MainFragment mMainFragment;
     private Set<AppInfo> mSelection; // 选择要操作的app(停用or移除列表)
     public MoveFloatingActionButton mFabDisable;
-    public LinearLayout mLlEnableApp, mLlAddShortcut, mLlCustomApp, mLlRemoveListEnable, mLlRemoveList, mLlUninstallApp, mLlCancelSelect;
+    public LinearLayout mLlEnableApp, mLlAddShortcut, mLlRemoveListEnable, mLlRemoveList, mLlUninstallApp, mLlCancelSelect;
     private long exitTime = 0;
     public String mRootStr = "";
 
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mFabDisable = (MoveFloatingActionButton) findViewById(R.id.fab_disable);
         mLlEnableApp = (LinearLayout) findViewById(R.id.ll_enable_app);
         mLlAddShortcut = (LinearLayout) findViewById(R.id.ll_add_shortcut);
-        mLlCustomApp = (LinearLayout) findViewById(R.id.ll_custom_app);
+        //mLlCustomApp = (LinearLayout) findViewById(R.id.ll_custom_app);
         mLlRemoveListEnable = (LinearLayout) findViewById(R.id.ll_remove_list_enable);
         mLlRemoveList = (LinearLayout) findViewById(R.id.ll_remove_list);
         mLlUninstallApp = (LinearLayout) findViewById(R.id.ll_uninstall_app);
@@ -105,9 +105,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mRootStr = getString(R.string.remove_list_enable_success);
                 mMainFragment.batchApps(2);
                 break;
-            case R.id.ll_custom_app:
-                mMainFragment.customApp();
-                break;
+//            case R.id.ll_custom_app:
+//                mMainFragment.customApp();
+//                break;
             case R.id.ll_remove_list:
                 mRootStr = getString(R.string.remove_list_success);
                 mMainFragment.batchApps(3);
@@ -124,7 +124,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mRootStr = getString(R.string.disable_success);
                 mMainFragment.batchApps(0);
                 break;
-
+            case R.id.ll_disable_app:
+                mMainFragment.batchApps(0);
+                break;
         }
     }
 
@@ -159,10 +161,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else {
             if (mSelection.size() == 1) {
                 mLlUninstallApp.setVisibility(View.VISIBLE);
-                mLlCustomApp.setVisibility(View.VISIBLE);
+                //mLlCustomApp.setVisibility(View.VISIBLE);
             } else {
                 mLlUninstallApp.setVisibility(View.GONE);
-                mLlCustomApp.setVisibility(View.GONE);
+                //mLlCustomApp.setVisibility(View.GONE);
             }
             for (AppInfo appInfo : mSelection) {
                 if (appInfo.isEnable() == 0) {

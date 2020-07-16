@@ -41,6 +41,34 @@
                 android:paddingTop="8dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_disable_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:onClick="onClick"
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
+
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="32dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_disable_app"
+                        android:tint="@color/menuIconColor"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disable_apps"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/ll_enable_app"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -76,8 +104,9 @@
                     android:gravity="center_vertical"
                     android:onClick="onClick"
                     android:orientation="horizontal"
+                    android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:paddingStart="16dp">
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="26dp"
@@ -85,14 +114,14 @@
                         android:layout_marginEnd="32dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_content_copy_black"
-                        android:tint="@color/menuIconColor"/>
+                        android:tint="@color/menuIconColor" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_shortcut"
                         android:textColor="@color/textPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -151,7 +180,7 @@
                         android:textSize="16sp"/>
 
                 </LinearLayout>
-
+<!--
                 <LinearLayout
                 android:id="@+id/ll_custom_app"
                 android:layout_width="match_parent"
@@ -179,7 +208,7 @@
                     android:textSize="16sp"/>
 
             </LinearLayout>
-
+-->
                 <LinearLayout
                     android:id="@+id/ll_uninstall_app"
                     android:layout_width="match_parent"
