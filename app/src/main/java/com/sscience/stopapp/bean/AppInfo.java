@@ -3,6 +3,7 @@ package com.sscience.stopapp.bean;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author SScience
@@ -20,12 +21,14 @@ public class AppInfo implements Serializable, Cloneable {
     public final static String APP_ICON = "appIcon";
     public final static String IS_ENABLE = "isEnable";
     public final static String IS_SYSTEM_APP = "isSystemApp";
+    public final static String LAST_LAUNCH = "lastLaunch";
 
-    public String appName;
-    public String appPackageName;
-    public Bitmap appIcon;
-    public int isEnable;
-    public int isSystemApp;
+    private String appName;
+    private String appPackageName;
+    private Bitmap appIcon;
+    private int isEnable;
+    private int isSystemApp;
+    private long lastLaunch;
 
     public String getAppName() {
         return appName;
@@ -65,6 +68,14 @@ public class AppInfo implements Serializable, Cloneable {
 
     public void setSystemApp(int systemApp) {
         isSystemApp = systemApp;
+    }
+
+    public long getLastLaunch() {
+        return lastLaunch;
+    }
+
+    public void setLastLaunch(long lastLaunch) {
+        this.lastLaunch = lastLaunch;
     }
 
     @Override

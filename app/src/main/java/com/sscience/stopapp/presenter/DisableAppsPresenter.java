@@ -101,6 +101,11 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
                         mAppInfoDBController.updateDisableApp(appInfo.getAppPackageName(), 1
                                 , AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
                         mListDisableApps.get(position).setEnable(1);
+
+                        mAppInfoDBController.updateAppLastLaunch(appInfo.getAppPackageName()
+                                , AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+                        mListDisableApps.get(position).setLastLaunch(System.currentTimeMillis());
+
                         //addShortcut(appInfo);
                         mView.upDateItemIfLaunch(appInfo, position);
 
@@ -174,8 +179,12 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
             SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
         } else {
             //addShortcut(appInfo);
+            appInfo.setLastLaunch(System.currentTimeMillis());
+            mAppInfoDBController.updateAppLastLaunch(appInfo.getAppPackageName()
+                    , AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
             launchAppIntent(appInfo.getAppPackageName());
-            mView.upDateItemIfLaunch(null, -1);
+            SharedPreferenceUtil.put(mActivity, RootActionIntentService.APP_UPDATE_HOME_APPS, true);
+            //mView.upDateItemIfLaunch(null, -1);
         }
     }
 

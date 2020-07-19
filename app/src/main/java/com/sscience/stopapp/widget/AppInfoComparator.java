@@ -20,16 +20,22 @@ public class AppInfoComparator implements Comparator<AppInfo> {
 
     @Override
     public int compare(AppInfo appInfo1, AppInfo appInfo2) {
-        String sa = appInfo1.getAppName();
-        if (TextUtils.isEmpty(sa)) {
-            sa = appInfo1.getAppPackageName();
-        }
-        String sb = appInfo2.getAppName();
-        if (TextUtils.isEmpty(sb)) {
-            sb = appInfo2.getAppPackageName();
-        }
+
         if (appInfo1.isEnable() == appInfo2.isEnable()) {
-            return sCollator.compare(sa, sb); // 参考自ApplicationInfo.java中的DisplayNameComparator
+            if (appInfo1.getLastLaunch() != appInfo2.getLastLaunch()) {
+                return (int)(appInfo2.getLastLaunch() - appInfo1.getLastLaunch());
+            }
+            else {
+                String sa = appInfo1.getAppName();
+                if (TextUtils.isEmpty(sa)) {
+                    sa = appInfo1.getAppPackageName();
+                }
+                String sb = appInfo2.getAppName();
+                if (TextUtils.isEmpty(sb)) {
+                    sb = appInfo2.getAppPackageName();
+                }
+                return sCollator.compare(sa, sb); // 参考自ApplicationInfo.java中的DisplayNameComparator
+            }
         }
         else {
             return appInfo2.isEnable() - appInfo1.isEnable();

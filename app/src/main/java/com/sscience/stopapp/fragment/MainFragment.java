@@ -398,14 +398,14 @@ public class MainFragment extends BaseFragment implements DisableAppsContract.Vi
             AppInfo info = mAppList.get(i);
             if (mMainActivity.getSelection().contains(info)) {
                 mMainActivity.getSelection().remove(info);
-                mDisableAppAdapter.notifyItemChanged(i);
             }
+            mDisableAppAdapter.notifyItemChanged(i);
         }
         mMainActivity.checkSelection();
-        String str = mMainActivity.mRootStr;
-        if (!TextUtils.isEmpty(str)) {
-            snackBarShow(mMainActivity.mCoordinatorLayout, mMainActivity.mRootStr);
-        }
+//        String str = mMainActivity.mRootStr;
+//        if (!TextUtils.isEmpty(str)) {
+//            snackBarShow(mMainActivity.mCoordinatorLayout, mMainActivity.mRootStr);
+//        }
         setRefreshing(false);
         if (mAppList.isEmpty()) {
             mDisableAppAdapter.showLoadFailed(R.drawable.empty, getResources().getString(R.string.no_disable_apps), "");

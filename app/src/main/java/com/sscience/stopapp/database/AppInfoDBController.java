@@ -52,6 +52,7 @@ public class AppInfoDBController {
                 appInfo.setAppIcon(CommonUtil.getImage(cursor.getBlob(cursor.getColumnIndex(AppInfo.APP_ICON))));
                 appInfo.setEnable(cursor.getInt(cursor.getColumnIndex(AppInfo.IS_ENABLE)));
                 appInfo.setSystemApp(cursor.getInt(cursor.getColumnIndex(AppInfo.IS_SYSTEM_APP)));
+                appInfo.setLastLaunch(cursor.getLong(cursor.getColumnIndex(AppInfo.LAST_LAUNCH)));
                 list.add(appInfo);
             } while (cursor.moveToPrevious());
         } finally {
@@ -137,6 +138,14 @@ public class AppInfoDBController {
         cv.put(AppInfo.IS_ENABLE, isEnable);
         String[] args = {packageName};
         mSQLiteDatabase.update(tableName, cv, AppInfo.APP_PACKAGE_NAME + "=?", args);
+    }
+
+    public void updateAppLastLaunch(String packageName, String tableName)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put(AppInfo.LAST_LAUNCH, System.currentTimeMillis());
+        String[] args = {packageName};
+        int ret = mSQLiteDatabase.update(tableName, cv, AppInfo.APP_PACKAGE_NAME + "=?", args);
     }
 
     /**

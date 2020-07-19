@@ -16,7 +16,7 @@ import com.sscience.stopapp.bean.AppInfo;
 public class AppInfoDBOpenHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     // Database Name
     private static final String DATABASE_NAME = "appInfo.db";
     // AppInfo Table Names
@@ -57,14 +57,15 @@ public class AppInfoDBOpenHelper extends SQLiteOpenHelper {
                         + "%s VARCHAR, " // appName
                         + "%s BLOB, " // appIcon
                         + "%s INTEGER, " // isEnable
-                        + "%s INTEGER " // isSystemApp
+                        + "%s INTEGER, " // isSystemApp
+                        + "%s INTEGER "// lastLaunch
                         + ")"
                 , AppInfo.APP_PACKAGE_NAME
                 , AppInfo.APP_NAME
                 , AppInfo.APP_ICON
                 , AppInfo.IS_ENABLE
                 , AppInfo.IS_SYSTEM_APP
-
+                , AppInfo.LAST_LAUNCH
         );
         return createTable;
     }
@@ -77,7 +78,7 @@ public class AppInfoDBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 1 && newVersion == 2) {
+        if (oldVersion == 2 && newVersion == 3) {
             // on upgrade drop older tables
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_APP_INFO);
             // create new table
