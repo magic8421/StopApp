@@ -20,25 +20,26 @@ public class AppInfoComparator implements Comparator<AppInfo> {
 
     @Override
     public int compare(AppInfo appInfo1, AppInfo appInfo2) {
-
-        if (appInfo1.isEnable() == appInfo2.isEnable()) {
-            if (appInfo1.getLastLaunch() != appInfo2.getLastLaunch()) {
-                return (int)(appInfo2.getLastLaunch() - appInfo1.getLastLaunch());
-            }
-            else {
-                String sa = appInfo1.getAppName();
-                if (TextUtils.isEmpty(sa)) {
-                    sa = appInfo1.getAppPackageName();
-                }
-                String sb = appInfo2.getAppName();
-                if (TextUtils.isEmpty(sb)) {
-                    sb = appInfo2.getAppPackageName();
-                }
-                return sCollator.compare(sa, sb); // 参考自ApplicationInfo.java中的DisplayNameComparator
-            }
+        if (appInfo1.isEnable() == 1 && appInfo2.isEnable() == 0) {
+            return -1;
         }
-        else {
-            return appInfo2.isEnable() - appInfo1.isEnable();
+        if (appInfo1.isEnable() == 0 && appInfo2.isEnable() == 1) {
+            return 1;
         }
+        if (appInfo1.getLastLaunch() > appInfo2.getLastLaunch()) {
+            return -1;
+        }
+        if (appInfo1.getLastLaunch() < appInfo2.getLastLaunch()) {
+            return 1;
+        }
+        String sa = appInfo1.getAppName();
+        if (TextUtils.isEmpty(sa)) {
+            sa = appInfo1.getAppPackageName();
+        }
+        String sb = appInfo2.getAppName();
+        if (TextUtils.isEmpty(sb)) {
+            sb = appInfo2.getAppPackageName();
+        }
+        return sCollator.compare(sa, sb); // 参考自ApplicationInfo.java中的DisplayNameComparator
     }
 }

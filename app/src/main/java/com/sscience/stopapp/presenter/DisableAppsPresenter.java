@@ -2,7 +2,11 @@ package com.sscience.stopapp.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextUtils;
 
@@ -26,6 +30,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.sscience.stopapp.model.AppsRepository.drawableToBitmap;
 
 
 /**
@@ -68,12 +74,34 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
             getDisableAppsFromRoot(AppsRepository.APPS_FLAG_DISABLE);
         } else {
             List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+            LoadAppIcon(disableApps);
             getDisableApps(disableApps, false);
 //            if (disableApps.isEmpty() && disableApps.size() == 0) {
 //                getDisableAppsFromRoot(AppsRepository.APPS_FLAG_DISABLE);
 //            } else {
 //                getDisableApps(disableApps, false);
 //            }
+        }
+    }
+
+    public void LoadAppIcon(List<AppInfo> disableApps)
+    {
+        PackageManager pm = mActivity.getPackageManager();
+        for (AppInfo appInfo : disableApps) {
+            Drawable appDrawable = null;
+            try {
+                ApplicationInfo applicationInfo = pm.getApplicationInfo(appInfo.getAppPackageName(), 0);
+                appDrawable = applicationInfo.loadIcon(pm);
+            } catch (Exception e) {
+                MyLogger.e(appInfo.getAppName());
+                MyLogger.e(e.toString());
+            }
+            if (appDrawable instanceof BitmapDrawable) {
+                appInfo.setAppIcon(((BitmapDrawable) appDrawable).getBitmap());
+            } else {
+                MyLogger.e("VectorDrawable:" + appInfo.getAppName());
+                appInfo.setAppIcon(drawableToBitmap(appDrawable));
+            }
         }
     }
 

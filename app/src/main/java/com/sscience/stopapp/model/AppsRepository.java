@@ -251,7 +251,7 @@ public class AppsRepository {
         return appInfo;
     }
 
-    private static Bitmap drawableToBitmap(Drawable drawable) {
+    public static Bitmap drawableToBitmap(Drawable drawable) {
         int w = drawable.getIntrinsicWidth();
         int h = drawable.getIntrinsicHeight();
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);

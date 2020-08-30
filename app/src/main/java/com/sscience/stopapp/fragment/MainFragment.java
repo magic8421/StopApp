@@ -353,7 +353,7 @@ public class MainFragment extends BaseFragment implements DisableAppsContract.Vi
                     if (mMainActivity.getSelection().contains(appInfo)) {
                         appInfo.setAppIcon(bitmap);
                         mDisableAppAdapter.updateItem(i, appInfo);
-                        mPresenter.updateAppIcon(appInfo.getAppPackageName(), bitmap);
+                        //mPresenter.updateAppIcon(appInfo.getAppPackageName(), bitmap);
                         break;
                     }
                 }

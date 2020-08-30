@@ -41,21 +41,22 @@ public class AppInfoDBController {
 
         final List<AppInfo> list = new ArrayList<>();
         try {
-            if (!cursor.moveToLast()) {
-                return list;
-            }
-            do {
+            while (cursor.moveToNext()) {
                 AppInfo appInfo = new AppInfo();
                 appInfo.setAppPackageName(cursor.getString(cursor.getColumnIndex(AppInfo.APP_PACKAGE_NAME)));
                 appInfo.setAppName(cursor.getString(cursor.getColumnIndex(AppInfo.APP_NAME)));
-                MyLogger.e(cursor.getString(cursor.getColumnIndex(AppInfo.APP_NAME)));
-                appInfo.setAppIcon(CommonUtil.getImage(cursor.getBlob(cursor.getColumnIndex(AppInfo.APP_ICON))));
+                //MyLogger.e(cursor.getString(cursor.getColumnIndex(AppInfo.APP_NAME)));
+                //appInfo.setAppIcon(CommonUtil.getImage(cursor.getBlob(cursor.getColumnIndex(AppInfo.APP_ICON))));
                 appInfo.setEnable(cursor.getInt(cursor.getColumnIndex(AppInfo.IS_ENABLE)));
                 appInfo.setSystemApp(cursor.getInt(cursor.getColumnIndex(AppInfo.IS_SYSTEM_APP)));
                 appInfo.setLastLaunch(cursor.getLong(cursor.getColumnIndex(AppInfo.LAST_LAUNCH)));
                 list.add(appInfo);
-            } while (cursor.moveToPrevious());
-        } finally {
+            }
+        }
+        catch (java.lang.Exception err) {
+            MyLogger.e(err.toString());
+        }
+        finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
             }
@@ -98,9 +99,10 @@ public class AppInfoDBController {
         ContentValues cv = new ContentValues();
         cv.put(AppInfo.APP_PACKAGE_NAME, appInfo.getAppPackageName());
         cv.put(AppInfo.APP_NAME, appInfo.getAppName());
-        cv.put(AppInfo.APP_ICON, CommonUtil.getBytes(appInfo.getAppIcon()));
+        //cv.put(AppInfo.APP_ICON, CommonUtil.getBytes(appInfo.getAppIcon()));
         cv.put(AppInfo.IS_ENABLE, appInfo.isEnable());
         cv.put(AppInfo.IS_SYSTEM_APP, appInfo.isSystemApp());
+        cv.put(AppInfo.LAST_LAUNCH, System.currentTimeMillis());
         mSQLiteDatabase.insert(tableName, null, cv);
     }
 
