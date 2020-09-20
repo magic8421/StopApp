@@ -73,7 +73,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
         if (spDisplayAllApps) {
             getDisableAppsFromRoot(AppsRepository.APPS_FLAG_DISABLE);
         } else {
-            List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+            List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(mActivity, AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
             LoadAppIcon(disableApps);
             getDisableApps(disableApps, false);
 //            if (disableApps.isEmpty() && disableApps.size() == 0) {
@@ -163,7 +163,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
     private void getDisableApps(List<AppInfo> appList, boolean isDisplayAllApps) {
         mListDisableApps.clear();
         if (isDisplayAllApps) {
-            Set<AppInfo> disableApps = new HashSet<>(mAppInfoDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_APP_INFO));
+            Set<AppInfo> disableApps = new HashSet<>(mAppInfoDBController.getDisableApps(mActivity, AppInfoDBOpenHelper.TABLE_NAME_APP_INFO));
             Set<AppInfo> allDisableApps = new HashSet<>(appList);
             for (AppInfo appInfo : allDisableApps) {
                 disableApps.add(appInfo);
@@ -302,7 +302,7 @@ public class DisableAppsPresenter implements DisableAppsContract.Presenter {
 
     @Override
     public void updateHomeApps() {
-        List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+        List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(this.mActivity, AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
         Collections.sort(disableApps, new AppInfoComparator());
         mView.getRootSuccess(mListDisableApps, disableApps);
         mListDisableApps = disableApps;

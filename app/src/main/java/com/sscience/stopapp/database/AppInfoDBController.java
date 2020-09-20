@@ -36,7 +36,7 @@ public class AppInfoDBController {
      * @param tableName
      * @return
      */
-    public List<AppInfo> getDisableApps(String tableName) {
+    public List<AppInfo> getDisableApps(Context ctx, String tableName) {
         final Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + tableName, null);
 
         final List<AppInfo> list = new ArrayList<>();

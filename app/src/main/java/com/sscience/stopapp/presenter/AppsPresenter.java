@@ -65,7 +65,7 @@ public class AppsPresenter implements AppsContract.Presenter {
 
     @Override
     public void addDisableApps(AppInfo appInfo) {
-        List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
+        List<AppInfo> disableApps = mAppInfoDBController.getDisableApps(mContext, AppInfoDBOpenHelper.TABLE_NAME_APP_INFO);
         if (disableApps.contains(appInfo)) {
             mView.hadAddDisableApps();
             return;

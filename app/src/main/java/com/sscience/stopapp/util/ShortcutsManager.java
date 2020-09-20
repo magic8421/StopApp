@@ -45,6 +45,7 @@ public class ShortcutsManager {
      * 添加App Shortcut
      */
     public void addAppShortcut(List<AppInfo> appList) {
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             List<AppInfo> appInfoDB = new ArrayList<>(
                     mDBController.getDisableApps(AppInfoDBOpenHelper.TABLE_NAME_SHORTCUT_APP_INFO));
@@ -67,6 +68,7 @@ public class ShortcutsManager {
             }
             mShortcutManager.setDynamicShortcuts(shortcutList);
         }
+        */
     }
 
     /**
